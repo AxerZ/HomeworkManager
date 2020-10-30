@@ -16,27 +16,27 @@ if (__FILE__ == ''){ die('Fatal error code: 0'); }
 error_reporting(E_ALL ^ E_DEPRECATED);
 
 // ----==== 程式初始档开始 ====-----
-define('DB_NAME', "homework"); //资料库名
+define('DB_NAME', "hw"); //资料库名
 
 define('DB_ADDR', "localhost");  //资料库ip
 
-define('DB_USR', "homework");  // 资料库使用者
+define('DB_USR', "hw");  // 资料库使用者
 
-define('DB_PWD', "12345678");  //资料库密码
+define('DB_PWD', "sScqS05P3I");  //资料库密码
 
-define('SUPER_PASSWD', "12345678");  //最高权限user 密码，后台添加用户时会用到
+define('SUPER_PASSWD', "a12345");  //最高权限user 密码，后台添加用户时会用到
 
 define('SendAllEmail', 0);  //Set 1 to enable email
 
-define('SITE_CNAME', "作业管理系统欢迎您！");  //网站标头
+define('SITE_CNAME', "作業管理系統！");  //网站标头
 
 define('SITE_DN', $_SERVER['HTTP_HOST']); //网域名或IP，请勿加上'/'
 
-define('SITE_URL', "http://". SITE_DN ."/homework/");  // 修改网站位址，请保留字串最后的 '/'
+define('SITE_URL', "http://". SITE_DN ."/");  // 修改网站位址，请保留字串最后的 '/'
 
 define('UPDIR', "upload/");
 
-define('UPLOAD_DIR', "/var/www/html/homework/".UPDIR ); //修改上传位址
+define('UPLOAD_DIR', "/home/hw/public_html/".UPDIR ); //修改上传位址
 
 define('TEMP_PATH', "temp/");
 
@@ -46,13 +46,13 @@ define('UPURL', SITE_URL. UPDIR);
 
 define('RANK_DIFFERENCE', 1); // 排序差值大小
 
-define('PAGE_ENCRYPT_KEY',"QQHW589632"); //全页加密码，勿更动
+define('PAGE_ENCRYPT_KEY',"QE45QHW2589632"); //全页加密码，勿更动
 
-define('MAX_IMG_SIZE', 16777210); //16MB 最大上传档案大小
+define('MAX_IMG_SIZE', 30777210); //16MB 最大上传档案大小
 
-define('MAX_IMG_WIDTH', 2400);  // 上传图片最大宽
+define('MAX_IMG_WIDTH', 9000);  // 上传图片最大宽
 
-define('MAX_IMG_HEIGHT', 2400);
+define('MAX_IMG_HEIGHT', 9000);
 
 define('ROWS_PER_PAGE', 30);    //页面一页笔数
 
@@ -66,7 +66,7 @@ define('SEMESTER2', 2); // 学期2起始月份
 
 define('HWPREFIX', 'hw'); // 作业目录字首xx，产生的目录会是 xx1, xx2, xx3...
 
-define('RESET_PWD', '12345678');   // 修改学生的密码时之预设新密码
+define('RESET_PWD', '4567');   // 修改学生的密码时之预设新密码
 
 // ========== 程式设定结束 ===============
 // 以下内容请勿任意修改，否则会造成程式损害

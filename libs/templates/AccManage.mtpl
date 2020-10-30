@@ -9,24 +9,24 @@
 $(function() {
 $("#sb1").click(function(){
   var msg="";
-  if($("#superpasswd").val()=="")msg += "超级密码必填\n";
-  if($("#email").val()=="")msg += "信箱名称必填\n";
-  if($("#cname").val()=="")msg += "会员姓名必填\n";
-  if( $("#passwdz").val()=="" ){ $("#passwdz").focus(); msg += "你未填入密码\n"; }
+  if($("#superpasswd").val()=="")msg += "超級密碼必填\n";
+  if($("#email").val()=="")msg += "信箱名稱必填\n";
+  if($("#cname").val()=="")msg += "會員姓名必填\n";
+  if( $("#passwdz").val()=="" ){ $("#passwdz").focus(); msg += "你未填入密碼\n"; }
   if( $("#passwdz").val() !=  $("#passwdz2").val()){
-    msg += "确认密码和密码不相同，请重新输入";
+    msg += "確認密碼和密碼不相同，請重新輸入";
     $("#passwdz2").focus();
   }
   if(msg =="")return true;
-  alert("错误：\n"+msg);
+  alert("錯誤：\n"+msg);
   return false;
 });
 $("#sb3").click(function(){
   var msg="";
-  if($("#superpasswd2").val()=="")msg += "超级密码必填\n";
-  if($("#email2").val()=="")msg += "信箱名称必填\n";
+  if($("#superpasswd2").val()=="")msg += "超級密碼必填\n";
+  if($("#email2").val()=="")msg += "信箱名稱必填\n";
   if(msg =="")return true;
-  alert("错误：\n"+msg);
+  alert("錯誤：\n"+msg);
   return false;
 });
 });
@@ -36,36 +36,36 @@ $("#sb3").click(function(){
 {{include file='Banner.mtpl'}}
 
 <div style="height:32px;">
-  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a> &gt; 帐号管理</div>
+  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a> &gt; 帳號管理</div>
   <div style="float:right; width:300px; text-align:right;"></div>
 </div>
 <div style="height:290px;  display:block">
 <div style="line-height:33px; width:660px; float:left; height:280px;  ">
 <fieldset style="text-align:left;">
-<legend><b>新增帐号</b></legend>
+<legend><b>新增帳號</b></legend>
 
 <form method="post" action="{{$smarty.const.SITE_URL}}manage.php">
   <input type="hidden" value="AddAccount" name="f" />
-  <span style="background-color:#9D0712; color:white">超级密码</span> * <input id="superpasswd" name="superpasswd" value="" maxlength="16" size="16" type="text" />   <font class="noticefont">超级密码设定在 includes/init.php 中</font><br>
-  会员信箱 * <input id="email" name="email" value="" maxlength="60" size="26" type="text" />
-  <font class="noticefont">登入的帐号</font>
+  <span style="background-color:#9D0712; color:white">超級密碼</span> * <input id="superpasswd" name="superpasswd" value="" maxlength="16" size="16" type="text" />   <font class="noticefont">超級密碼設定在 includes/init.php 中</font><br>
+  會員信箱 * <input id="email" name="email" value="" maxlength="60" size="26" type="text" />
+  <font class="noticefont">登入的帳號</font>
   <br />
-  会员代号 <input id="usID" name="usID" value="" maxlength="18" size="22" type="text" />
-  <font class="noticefont">使用者的别名，显示在会员前台的留言上。</font>
+  會員代號 <input id="usID" name="usID" value="" maxlength="18" size="22" type="text" />
+  <font class="noticefont">使用者的別名，顯示在會員前台的留言上。</font>
   <br />
-  会员姓名 * <input id="cname" name="cname" value="" maxlength="16" size="20" type="text" />
-  <font class="noticefont">使用者姓名，会显示在作业拥有者栏位。</font>
+  會員姓名 * <input id="cname" name="cname" value="" maxlength="16" size="20" type="text" />
+  <font class="noticefont">使用者姓名，會顯示在作業擁有者欄位。</font>
   <br />
-  输入密码 * <input name="passwd" id="passwdz" value="" type="password" size="14" maxlength="16" /><br />
-  再次输入密码 * <input name="passwd2" id="passwdz2" value="" type="password" size="14" maxlength="16" /><br />
-  <input type="submit" id="sb1" value="新增帐号" style="height:24px; margin:10px 10px 10px 10px;" />
+  輸入密碼 * <input name="passwd" id="passwdz" value="" type="password" size="14" maxlength="16" /><br />
+  再次輸入密碼 * <input name="passwd2" id="passwdz2" value="" type="password" size="14" maxlength="16" /><br />
+  <input type="submit" id="sb1" value="新增帳號" style="height:24px; margin:10px 10px 10px 10px;" />
 </form>
 </legend>
 </div>
 
 <div style="line-height:28px; height:280px; width:300px; margin-right:10px;float:right; overflow-x: hidden;overflow-y:scroll;">
 <fieldset style="text-align:left;">
-<legend><b>现有帐号</b></legend>
+<legend><b>現有帳號</b></legend>
 {{foreach from=$obj->GetMemberList() item=b }}
 {{$b}}<br />
 {{/foreach}}
@@ -76,14 +76,14 @@ $("#sb3").click(function(){
 
 <div style="line-height:33px; display:block">
 <fieldset style="text-align:left;">
-<legend><b>删除帐号</b></legend>
+<legend><b>刪除帳號</b></legend>
 
 <form method="post" action="{{$smarty.const.SITE_URL}}manage.php">
   <input type="hidden" value="DelAccount" name="f" />
-  <span style="background-color:#9D0712; color:white">超级密码</span> * <input id="superpasswd2" name="superpasswd" value="" maxlength="16" size="16" type="text" />   <font class="noticefont">超级密码设定在 init.php 中</font><br>
-  要删除的会员信箱 * <input id="email2" name="email" value="" maxlength="60" size="26" type="text" />
+  <span style="background-color:#9D0712; color:white">超級密碼</span> * <input id="superpasswd2" name="superpasswd" value="" maxlength="16" size="16" type="text" />   <font class="noticefont">超級密碼設定在 init.php 中</font><br>
+  要刪除的會員信箱 * <input id="email2" name="email" value="" maxlength="60" size="26" type="text" />
   <br />
-  <input type="submit" id="sb3" value="删除帐号" style="height:24px; margin:10px 10px 10px 10px;" />
+  <input type="submit" id="sb3" value="刪除帳號" style="height:24px; margin:10px 10px 10px 10px;" />
 </form>
 
 </fieldset>
@@ -95,3 +95,4 @@ $("#sb3").click(function(){
 {{include file='Footer.mtpl'}}
 
 </body>
+

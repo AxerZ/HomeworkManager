@@ -73,26 +73,26 @@ function itemexist(arr,v){ if(arr.lastIndexOf(v)==-1)return false;  return true;
 {{include file='Banner.mtpl'}}
 
 <div style="text-align:left;">
-<div style="display:inline-block; height:35px; margin-right:30px;" class="opbar"><span id="openall">全展开</span> <span id="closeall">全收缩</span></div>
-<div style="display:inline-block" class="sortbar">排序方式 <span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=8">群组</a></span> 
-<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=9">有异动</a></span> 
-<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=7">建立时间</a></span></div>
+<div style="display:inline-block; height:35px; margin-right:30px;" class="opbar"><span id="openall">全展開</span> <span id="closeall">全收縮</span></div>
+<div style="display:inline-block" class="sortbar">排序方式 <span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=8">群組</a></span> 
+<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=9">有異動</a></span> 
+<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=7">建立時間</a></span></div>
 <table border="0" width="975">
  {{assign var='ii' value=1 }}
 {{foreach from=$obj->GetHwGroupList() item=b}}
 <tr><td height="30"><img src="{{$smarty.const.SITE_URL}}images/node/del.gif" width="20" class="folding" />
-  <div style="display:inline-block; min-width:130px; background-color:#DED7CA; color:#333; vertical-align:top; font-weight:bold; font-size:16px; padding-left:5px; padding-right:10px;">{{$b.classID|default:'无分类群组'}}</div>
-  <span style="vertical-align:text-bottom; font-size:13px; color:#777">笔数 <span style="color:#002008">{{$b.cnt}}</span> 上传数{{$b.sumup}}/ 通过数{{$b.sumpass}}</span>
+  <div style="display:inline-block; min-width:130px; background-color:#DED7CA; color:#333; vertical-align:top; font-weight:bold; font-size:16px; padding-left:5px; padding-right:10px;">{{$b.classID|default:'無分類群組'}}</div>
+  <span style="vertical-align:text-bottom; font-size:13px; color:#777">筆數 <span style="color:#002008">{{$b.cnt}}</span> 上傳數{{$b.sumup}}/ 通過數{{$b.sumpass}}</span>
   <div id="{{$b.hash}}"> 
    {{foreach from=$obj->GetHwGroupDetails($b.classID) item=d}}
      <div style="color:#444; margin-left:26px; display:block; font-size:10pt; background-color:{{cycle values="#EDAABC,#E0DEEE"}}">
      - <small>[{{$d.hID}}]</small> 
        <div style="padding-right:30px; font-size:11pt; min-width:170px; font-weight:bold; display:inline-block;"><a href="{{$smarty.const.SITE_URL}}index.php?f=HwDetail&amp;c={{$d.vc}}" title="{{$d.hwTitle}}"><b>{{$d.hwTitle}}</b></a></div>
-       <span>上传{{$d.uploadCnt}} 通过{{$d.passedCnt}} 点阅{{$d.clicked}} {{$d.hwO}}</span> 
-       开放上传 {{$d.fromDT}}~{{$d.dueDT}}
-{{if $d.canUpload ==1}}<span style="color:white; background-color:#9E0000; padding:2px;">作业上传中{{else}}<span style="color:#777; background-color:#FFFFCF;">已逾期{{/if}}</span>
-{{if $d.display ==1}}<span style="color:white; background-color:#8C2552; padding:2px;">开放参观{{/if}}</span>
-       <!-- <div style="float:right; width:200px;">最后异动 {{$d.lastModDT|default:'无'}}</div> -->
+       <span>上傳{{$d.uploadCnt}} 通過{{$d.passedCnt}} 點閱{{$d.clicked}} {{$d.hwO}}</span> 
+       開放上傳 {{$d.fromDT}}~{{$d.dueDT}}
+{{if $d.canUpload ==1}}<span style="color:white; background-color:#9E0000; padding:2px;">作業上傳中{{else}}<span style="color:#777; background-color:#FFFFCF;">已逾期{{/if}}</span>
+{{if $d.display ==1}}<span style="color:white; background-color:#8C2552; padding:2px;">開放參觀{{/if}}</span>
+       <!-- <div style="float:right; width:200px;">最後異動 {{$d.lastModDT|default:'無'}}</div> -->
      </div>
    {{/foreach}}
   </div>
@@ -107,3 +107,4 @@ function itemexist(arr,v){ if(arr.lastIndexOf(v)==-1)return false;  return true;
 {{include file='Footer.mtpl'}}
 
 </body>
+

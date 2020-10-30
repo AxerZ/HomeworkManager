@@ -5,6 +5,33 @@ body {text-align:center; margin:0 auto 10px auto; }
 img{border:0px; }
 a{ text-decoration:none; color: #841129; }
 li{ list-style:none}
+input[type=button], input[type=submit], input[type=file], button {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+input[type=text] {
+  padding: 3px 8px;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  border-radius: 3px;
+}
 
 .cancel { background-color:darkred; color:white; height:32px;}
 .docfont { font-size:10pt; color:#555; }

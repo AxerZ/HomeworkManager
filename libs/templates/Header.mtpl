@@ -4,9 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="robots" content="ALL" />
 <meta name="revisit-after" content="1" />
-<meta name="keywords" content="作业管理系统" />
-<meta name="description" content="作业管理系统 "/>
-<meta name="generator" content="作业管理系统" />
+<meta name="keywords" content="作業管理系统" />
+<meta name="description" content="作業管理系统 "/>
+<meta name="generator" content="作業管理系统" />
 <meta name="author" content="张本和 and 老周部落" />
 <meta name="copyright" content="张本和 and 老周部落" />
 <title>{{$smarty.const.SITE_CNAME}}</title>

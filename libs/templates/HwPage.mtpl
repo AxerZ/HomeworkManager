@@ -8,7 +8,7 @@ $(function() {
     var msg="";
     if( $("#fn").val() == "") msg += "請選擇上檔案\n";
     if( $("#cid").val() == "") msg += "座號必填\n"; 
-    if( $("#cname").val() == "") msg += "姓名必填\n"; 
+//    if( $("#cname").val() == "") msg += "姓名必填\n"; 
     if( $("#passwd").val() == "") msg += "刪除及修改密碼必填\n";
     if( msg != ""){ alert( "錯誤：\n" +msg); return false; }
   });
@@ -44,9 +44,6 @@ $(function() {
 </script>
 </head>
 
-
-
-</head>
 <body>
 {{include file='Banner.mtpl'}}
 <div style="height:32px;">
@@ -56,9 +53,10 @@ $(function() {
 <div style="text-align:left;">
 
 <h3 style="text-shadow: 5px 5px 5px #197FD8;">{{$d.hwTitle}}</h3>
-<table width="100%" cellpadding="3" cellspacing="3" border="1" style="border:3px solid #71BF0B;border-collapse:collapse;text-align:left; font-size:12px;">
-<tr><td><small>[{{$d.hID}}]</small></td><td>發佈人 {{$d.hwO}}</td><td>上傳件數 {{$d.uploadCnt}}</td><td>通過件數 {{$d.passedCnt}}</td><td>點閱 {{$d.clicked}}</td><td>最後更新 {{$d.uDT}}</td><td><b>上傳有效日期 {{$d.fromDT}} ~ {{$d.dueDT}}</b></td>
-<td>{{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" width="12" height="12" />{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" width="12" height="12">{{/if}} {{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼"  width="12" height="12" />{{/if}}</td>
+<table width="100%" cellpadding="5" cellspacing="5" border="1" style="border:3px solid #71BF0B;border-collapse:collapse;text-align:left; font-size:12px;">
+<tr><td><small>[{{$d.hID}}]</small></td><td>上傳件數 {{$d.uploadCnt}}</td><td>通過件數 {{$d.passedCnt}}</td>
+<td><b>上傳有效日期 {{$d.fromDT}} ~ {{$d.dueDT}}</b></td>
+<td>{{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" width="12" height="12" />{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" width="12" height="12">{{/if}} {{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼"  width="12" height="12" />{{/if}} By {{$d.hwO}}</td></td>
 </tr></table>
 <table width="100%">
 {{if $d.canUpload eq 1 }}
@@ -69,15 +67,18 @@ $(function() {
 {{if $d.upPasswd eq 1 }}<div style="background-color:#970862;color:white; display:block;">上傳需要密碼，請輸入上傳密碼：
 <input type="text" name="upPasswd" id="upPasswd" value="" size="12" maxlength="12"  /> <input type="button" id="chkpasswdbtn" value="驗證" /></div>
 {{/if}}
-
+<div class="fileupzone">
 <input name="MyFile" id="fn" type="file" size="44" /> <font class="warningfont">最大可上傳檔案大小 {{$maxsize}}</font><br />
+</div>
 <input type="hidden" name="f" value="UploadHw" />
 <input type="hidden" name="hID" value="{{$d.hID}}" />
-座號 * <input type="text" name="cid" id="cid" value="" size="12" maxlength="12"  /> <br />
-姓名 * <input type="text" name="cname" id="cname" value="" size="12" maxlength="12"  /> <br />
-文件說明 <input type="text" name="remark" value="" size="60" maxlength="100"  /> <font class="docfont">文件說明限訂最多100個字</font><br />
-請輸入刪除及修改密碼 * <input type="text" name="passwd" id="passwd" value="" size="12" maxlength="12" />  <font class="warningfont">最大長度為12，此欄為未來修改及刪除的依據</font><br />
-<input id="sb1" type="submit" value="上傳" /></form>
+座號　<input type="text" name="cid" id="cid" value="" maxlength="12" placeholder="01" required /> <br />
+名稱　<input type="text" name="cname" id="cname" value=""  maxlength="12" placeholder="識別名"  /> <br />
+說明　<input type="text" name="remark" value="" size="60" maxlength="100" placeholder="文件說明限訂最多100個字" />
+<div class="formsection">
+刪除及修改密碼 * <input type="text" name="passwd" id="passwd" value="" size="12" maxlength="12" />  <font class="warningfont">最大長度為12，此欄為未來修改及刪除的依據</font><br />
+</div>
+<input id="sb1" type="submit" value="上傳" class="upbutton" /></form>
 </div>
 </td></tr>
 {{else}}
@@ -104,16 +105,12 @@ $(function() {
   {{foreach from=$obj->GetUploadHwList($hID) item=e}}
   {{if $e.passed eq 1 }}<div class="hwUnitDiv passedDiv">{{else}}<div class="hwUnitDiv">{{/if}}
     {{if $d.display eq 1 }}
-    <!-- <a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png" style="display:block; margin-left:10px;" width="120" height="120" /></a> -->
     <a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png" style="display: block; margin: 20px auto;" width="64" height="64" /></a>
-    <!-- <a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><h5>{{$e.cname|default:'不公開'}}</h5></a>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過" width="16" height="16" />{{/if}}<H4>{{$e.oFileName}} {{$e.size}}bytes {{$e.uDT}}</h4><br /> -->
-<a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><h5>座號: {{$e.cid|default:'不公開'}}</h5><br /><h5>姓名: {{$e.cname|default:'不公開'}}</h5></a>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過" width="16" height="16" />{{/if}}<br /><H4><!-- {{$e.oFileName}} -->{{$e.size}}bytes<br /> {{$e.uDT}}</h4><br />
+<a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><h5>座號: {{$e.cid|default:'不公開'}}</h5><br /><h5>{{$e.cname|default:'不公開'}}</h5></a>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過" width="16" height="16" />{{/if}}<br /><H4><!-- {{$e.oFileName}} -->{{$e.sz}}<br />修改 {{$obj->createTimeDifference($e.uDT)}}</h4><br />
     <h4>評分: {{$e.score|default:'無'}}</h4>
     {{else}}
-    <!-- <img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png"  style="display:block; margin-left:10px;"  width="120" height="120" /> -->
 	<img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png" style="display: block; margin: 20px auto;" width="64" height="64" />
-    <!-- <h5>{{$e.cname|default:'不公開'}}</h5>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過"  width="16" height="16" />{{/if}}<br /><H4><font style="color:#B10B4E;">{{$e.oFileName}}</font> {{$e.size}}bytes {{$e.uDT}}</h4> -->
-	<h5>座號: {{$e.cid|default:'不公開'}}</h5><br /><h5>姓名: {{$e.cname|default:'不公開'}}</h5>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過"  width="16" height="16" />{{/if}}<br /><H4><!-- <font style="color:#B10B4E;">{{$e.oFileName}}</font>  -->{{$e.size}}bytes<br />{{$e.uDT}}</h4>
+	<h5>座號: {{$e.cid|default:'不公開'}}</h5><br /><h5>{{$e.cname|default:'不公開'}}</h5>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過"  width="16" height="16" />{{/if}}<br /><H4><!-- <font style="color:#B10B4E;">{{$e.oFileName}}</font>  -->{{$e.sz}}<br />修改 {{$obj->createTimeDifference($e.uDT)}}</h4>
     {{/if}}
     <br />
   {{if $d.canUpload eq 1 }}    
@@ -156,7 +153,6 @@ $(function() {
 
 
 {{include file='Footer.mtpl'}}
-{{$obj->RecHwPgCnt($hID)}}
 </body>
 
 

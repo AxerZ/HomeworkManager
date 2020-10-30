@@ -19,7 +19,7 @@
       </form>
      <img src="{{$smarty.const.SITE_URL}}images/index/nametxt.gif" alt="姓名" style="margin-left:20px;" width="40"  />
 {{if isset($smarty.session.email)}}
-  <div style="float:right; width:200px;margin-top:7px; text-align:left; color:#012C56;">{{$smarty.session.cname}} [<a href="{{$smarty.const.SITE_URL}}auth.php?f=Logout">登出</a>]</div>
+  <div style="float:right; max-width:180px; text-align:left; color:#012C56;">{{$smarty.session.cname}} [<a href="{{$smarty.const.SITE_URL}}auth.php?f=Logout">登出</a>]</div>
 {{else}}无名氏 [<a href="{{$smarty.const.SITE_URL}}index.php?f=Login">登入</a>]{{/if}}
    </div>
     <div class="hearderMenuDiv">

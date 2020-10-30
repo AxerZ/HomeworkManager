@@ -17,12 +17,10 @@ $obj = new index_class();
 $obj->DB= $DB;
 $obj->f = $f;
 $obj->SetSession($_SESSION);
-
 //For index only
 $view->caching = 0;
 $view->compile_check = true;
 $view->cache_lifetime = 10800; //3 hours
-
 if( !isset($_SESSION['priv'])) $_SESSION['priv'] = $obj->GetNoLoginPrivArr();
 $view->assign('obj', $obj);
 $view->assign('f', $f);

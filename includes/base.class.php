@@ -782,9 +782,71 @@ DOX;
     }
     return $link;
   }
-}//End Class
 
 
+  public function createTimeDifference($created_time)
+  {
+
+    date_default_timezone_set('Asia/Taipei'); //Change as per your default time
+        $str = strtotime($created_time);
+        $today = strtotime(date('Y-m-d H:i:s'));
+
+        // It returns the time difference in Seconds...
+        $time_differnce = $today-$str;
+
+        // To Calculate the time difference in Years...
+        $years = 946080000;
+
+        // To Calculate the time difference in Months...
+        $months = 2592000;
+
+        // To Calculate the time difference in Days...
+        $days = 86400;
+        $hours = 3600;
+
+        // To Calculate the time difference in Minutes...
+        $minutes = 60;
+          $times= array(" 年前"," 月前"," 天前"," 小時前"," 分前"," 秒前", "剛剛");
+
+        if(intval($time_differnce/$years) > 1)
+        {
+            return intval($time_differnce/$years). $times[0];
+        }else if(intval($time_differnce/$years) > 0)
+        {
+            return intval($time_differnce/$years).$times[0];
+        }else if(intval($time_differnce/$months) > 1)
+        {
+            return intval($time_differnce/$months).$times[1];
+        }else if(intval(($time_differnce/$months)) > 0)
+        {
+            return intval(($time_differnce/$months)).$times[1];
+        }else if(intval(($time_differnce/$days)) > 1)
+        {
+            return intval(($time_differnce/$days)).$times[2];
+        }else if (intval(($time_differnce/$days)) > 0)
+        {
+            return intval(($time_differnce/$days)).$times[2];
+        }else if (intval(($time_differnce/$hours)) > 1)
+        {
+            return intval(($time_differnce/$hours)).$times[3];
+        }else if (intval(($time_differnce/$hours)) > 0)
+        {
+            return intval(($time_differnce/$hours)).$times[3];
+        }else if (intval(($time_differnce/$minutes)) > 1)
+        {
+            return intval(($time_differnce/$minutes)).$times[4];
+        }else if (intval(($time_differnce/$minutes)) > 0)
+        {
+            return intval(($time_differnce/$minutes)).$times[4];
+        }else if (intval(($time_differnce)) > 1)
+        {
+            return intval(($time_differnce)).$times[5];
+        }else
+        {
+            return $times[6];
+        }
+  }
+}
 class basic_class {
   public function EmailTo($From, $To, $subject, $message)
   {
@@ -794,7 +856,6 @@ class basic_class {
     $bool = mail($To, $subject." (UTF-8 Encoded)", $content, $headers);
     return $bool;
   }
-
 }
 
 
@@ -1023,5 +1084,7 @@ class Image_Proc_class {
     $this->im = imagecreatefromjpeg($this->srcimg);
     }
   }
+
+
 } //End Class Image
 

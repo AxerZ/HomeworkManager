@@ -5,9 +5,9 @@ body {text-align:center; margin:0 auto 10px auto; }
 img{border:0px; }
 a{ text-decoration:none; color: #841129; }
 li{ list-style:none}
-input[type=button], input[type=submit], input[type=file], button {
+input[type=button], input[type=submit], button {
 	display: inline-block;
-	margin-bottom: 0;
+	margin-bottom: 10px;
 	font-weight: 400;
 	text-align: center;
 	white-space: nowrap;
@@ -15,8 +15,7 @@ input[type=button], input[type=submit], input[type=file], button {
 	-ms-touch-action: manipulation;
 	touch-action: manipulation;
 	cursor: pointer;
-	background-image: none;
-	border: 1px solid transparent;
+	background: #c8e37f;
 	padding: 6px 12px;
 	font-size: 14px;
 	line-height: 1.42857143;
@@ -25,14 +24,33 @@ input[type=button], input[type=submit], input[type=file], button {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+
 }
 input[type=text] {
-  padding: 3px 8px;
+  padding: 5px 10px;
   font-size: 1.2em;
-  line-height: 1.2em;
+  line-height: 1.3em;
   border-radius: 3px;
 }
-
+.fileupzone {
+  margin-bottom:10px;
+  background:#d0f2ec;
+  padding:5px;
+}
+.fileupzone input[type=file] {
+      padding: 6px 12px;
+    font-size: 1.4em;
+    line-height: 1.42857143;
+    border-radius: 4px;
+}
+.formsection {
+  margin-bottom:5px; 
+}
+.upbutton {
+  width:220px;
+  height:3.4em;
+  border:3px white solid;
+} 
 .cancel { background-color:darkred; color:white; height:32px;}
 .docfont { font-size:10pt; color:#555; }
 .errorfont { font-size:10pt; color:red; }
@@ -80,7 +98,9 @@ input[type=text] {
 .sortbar span:hover a{ color:#E0BFD7; }
 
 /* One HomeWork  */
-.hwUnitDiv { float:left; width:150px; height:230px; margin:0 10px 10px 0; border:1px dashed #CCCCCC; }
+.hwUnitDiv { float:left; width:150px; height:230px; margin:0 10px 10px 0; 
+padding: 5px;
+border:1px dashed #CCCCCC; }
 .hwUnitDiv h4 {display:inline; font-size:13px; color:#666; }
 .hwUnitDiv h5 {display:inline; font-size:15px; color:#4E30AF; }
 .hwUnitDiv a { font-size:15px; color:#163E5B; }

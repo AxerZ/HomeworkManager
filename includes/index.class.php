@@ -244,7 +244,12 @@ class Index_class extends Bila_base_class {
       $tbl['stp']=6;  //delete
       $arr[$ii]['dc'] = $this->Encrypt_Arr2c($tbl);
       $arr[$ii]['vc'] = $this->LongEncode($sn);
-    }
+	  $sz = $arr[$ii]['size'];
+      
+      if($sz>1000) $arr[$ii]['sz']= round( $sz /1000,1 ) . "KB";
+	  elseif($sz>1000000) $arr[$ii]['sz']= round( $sz /1000000,1 ) . "MB";
+	  else $arr[$ii]['sz']= $sz. "B";
+	}
     return $arr;
   }
   public function Log2Counter($pgID=0){

@@ -1,7 +1,7 @@
 <?php
 /*
 
-作业上传系统独立精简版 v1
+作业上傳系统独立精简版 v1
 原始版本作者：CopyRight(C) 程式设计 Coding axer@tc.edu.tw 20120216-0314
 修改版本作者：CopyRight(C) 老周部落
 版权宣告：本程式遵从GNUv3规范 http://www.gnu.org/licenses/gpl.html
@@ -56,7 +56,7 @@ class Homework_class extends Bila_base_class {
     }
   }
   public function CheckUploadStatusByCid($cID, $hID)
-  {//新增根据学号和作业号判定作业上传状态，因为真的有上传两次作业的和输错学号的......
+  {//新增根据学号和作业号判定作业上傳状态，因为真的有上傳两次作业的和输错学号的......
     $sql = "select `sn` from `hwUpload` where `cID`={$cID} and `hID`={$hID} limit 1";
     $row= $this->DB->GetRow( $sql );
     if(isset($row['sn'])){
@@ -132,9 +132,9 @@ class Homework_class extends Bila_base_class {
     $fs = $file['size']; // ex. 340 (in bytes)
     $tempfs = $file['tmp_name'];  // ex. /var/tmp/phpF390NL
     $err = $file['error'];  // error:0
-    if ($err>0 || $fs <=0){ $msg= "传输错误，错误次". $err; return -1; }
+    if ($err>0 || $fs <=0){ $msg= "傳输错误，错误次". $err; return -1; }
     $IsOk =$this->ChkImgFileExt($fn, $this->NotAllowedFileExtArr, $ext);  //1: not allowed file
-    if($IsOk > 0){ $msg= "传档类型 ". implode(',',$this->NotAllowedFileExtArr) . "不被允许"; return -2;}
+    if($IsOk > 0){ $msg= "傳档类型 ". implode(',',$this->NotAllowedFileExtArr) . "不被允许"; return -2;}
     if(empty($foldername)) {
         $currDir = UPLOAD_DIR .$imgDir;
     } else {

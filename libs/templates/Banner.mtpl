@@ -6,6 +6,7 @@
   <div><a href="{{$smarty.const.SITE_URL}}" title="精讚版作業上传logo"><img src="{{$smarty.const.SITE_URL}}images/index/hwlogo.gif"  alt="精讚版作業上传logo"></a></div></td>
   <td class="headerTD">
     <div style="width:580px; margin-left:4px; height:36px; margin-top:8px; color:#720404; font-size:15px;">
+<!--
      <img src="{{$smarty.const.SITE_URL}}images/index/findhwtxt.gif" alt="寻找作業" width="80" height="22" />
        <form action="{{$smarty.const.SITE_URL}}?f=List" name="f1" method="post" id="f1" style="display:inline">
       <input type="hidden" name="f" value="List" />
@@ -17,10 +18,11 @@
       <input name="_display" id="_display" type="hidden" value="0" />
       <input name="_thissem" id="_thissem" type="hidden" value="0" />
       </form>
+-->
      <img src="{{$smarty.const.SITE_URL}}images/index/nametxt.gif" alt="姓名" style="margin-left:20px;" width="40"  />
 {{if isset($smarty.session.email)}}
   <div style="float:right; max-width:180px; text-align:left; color:#012C56;">{{$smarty.session.cname}} [<a href="{{$smarty.const.SITE_URL}}auth.php?f=Logout">登出</a>]</div>
-{{else}}无名氏 [<a href="{{$smarty.const.SITE_URL}}index.php?f=Login">登入</a>]{{/if}}
+{{else}}無名氏 [<a href="{{$smarty.const.SITE_URL}}index.php?f=Login">登入</a>]{{/if}}
    </div>
     <div class="hearderMenuDiv">
      <img src="{{$smarty.const.SITE_URL}}images/index/penhat.gif" alt="作業展示" />

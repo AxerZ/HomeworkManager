@@ -129,6 +129,8 @@ width:99%; margin-bottom:6px;
 /* Mng UP HW */
 .hwFieldset {text-align:left; color:#333; font-size:17px; }
 .hwFieldset b{color:#660101; font-size:15px; }
+.previews { width:130px; display:block; margin: 20px auto; height:80px; }
+.previews:hover { width:100%; height:auto; max-width:400px; z-index:100; float:left; position:absolute; margin-left:-50px; }
 
 /* Footer */
 .footerDiv { height:40px; text-align:left; background-image:url(../index/grayyelstrip.gif);

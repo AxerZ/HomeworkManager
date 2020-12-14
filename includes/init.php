@@ -22,9 +22,9 @@ define('DB_ADDR', "localhost");  //资料库ip
 
 define('DB_USR', "hw");  // 资料库使用者
 
-define('DB_PWD', "312121I");  //资料库密码
+define('DB_PWD', "sScqS05P3I");  //资料库密码
 
-define('SUPER_PASSWD', "12345678");  //最高权限user 密码，后台添加用户时会用到
+define('SUPER_PASSWD', "1234567890");  //最高权限user 密码，后台添加用户时会用到
 
 define('SendAllEmail', 0);  //Set 1 to enable email
 

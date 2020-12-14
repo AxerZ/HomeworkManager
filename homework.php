@@ -1,6 +1,6 @@
 <?php
 /*
-作業上传系统独立精简版 v1
+作業上傳系统独立精简版 v1
 原始版本作者：CopyRight(C) 程式设计 Coding axer@tc.edu.tw 20120216-0314
 修改版本作者：CopyRight(C) 老周部落
 版权宣告：本程式遵从GNUv3规范 http://www.gnu.org/licenses/gpl.html 
@@ -76,18 +76,18 @@ switch($f){
     $sn = (int)$obj->LongDecode($_POST['snc']);
     $arr= array();
     $row = $obj-> GetOneUploadHw($sn);
-    //判断作業编号是否正确
+    //判断作業編號是否正确
     if(!isset($row['hID']) || $row['hID']<= 0){
-      $msg="錯誤的作業编号Err-12";
+      $msg="錯誤的作業編號Err-12";
       $msg .= $obj->JS_CntDn( "{$_SESSION['currURL']}" , 5000);
       $view->assign('msg', $msg);
       $view->display('Message.mtpl');
       break;
     }
-    //判断作業是否在可上传状态
+    //判断作業是否在可上傳状态
     $ret = $obj-> GetOneHw($row['hID']);
     if ($ret['canUpload'] == 0){
-      $msg="檔案修改失败，非上传时间Err-3";
+      $msg="檔案修改失敗，非上傳时间Err-3";
       $msg .= $obj->JS_CntDn( "{$_SESSION['currURL']}" , 5000);
       $view->assign('msg', $msg);
       $view->display('Message.mtpl');
@@ -103,7 +103,7 @@ switch($f){
       $view->display('Message.mtpl');
       break;
     }
-    if($_FILES['MyFile']['size']>0){ // 有上传新档
+    if($_FILES['MyFile']['size']>0){ // 有上傳新档
       //通过数据库获取作業标题，并将其传送给ProcUpFiles, 作業标准化命名需求
       $title = $obj-> GetHwTitle($row['hID']);
       $imgDir = HWPREFIX ."{$row['hID']}/";   //ex: 2008DecMedia/
@@ -113,23 +113,24 @@ switch($f){
         $foldername = $obj->GetHwFolderNameFormat($row['hID']) . "/";   //ex: xx00/
       }
       if(empty($obj->GetHwFileNameFormat($row['hID']))) {
-        $filename = "\$title-\$cid-\$cname.\$ext";
+        $rd= date('dis');
+        $filename = "\$title-\$cid-". $rd .".\$ext";  
       } else {
         $filename = $obj->GetHwFileNameFormat($row['hID']);
       }
       $IsOk= $obj->ProcUpFiles($_FILES['MyFile'], $imgDir, $rrr, $title, $cid, $cname, $foldername, $filename);
       if( $IsOk >0){ $arr= $rrr; }
-      else $msg="檔案上传失败 Err{$IsOk}";
+      else $msg="檔案上傳失敗 Err{$IsOk}";
     } else {
       $hwcheck = $obj-> GetOneUploadHw($sn);
       if ($hwcheck['cid'] != $cid || $hwcheck['cname'] != $cname){
-        $msg="如需修改学号及姓名，请重新上传文档！";
+        $msg="如需修改学号及姓名，请重新上傳文档！";
         $msg .= $obj->JS_CntDn( "{$_SESSION['currURL']}" , 5000);
         $view->assign('msg', $msg);
         $view->display('Message.mtpl');
         break;
 	  } else {
-        $IsOk = 1;//无上传文件直接标记为成功
+        $IsOk = 1;//无上傳文件直接标记为成功
       }
     }
     $arr['sn']= $sn;
@@ -138,11 +139,11 @@ switch($f){
     $arr['cid']= mysqli_real_escape_string($obj->DB->_connectionID, trim( $_POST['cid'] ));//学号
     $arr['cname']= mysqli_real_escape_string($obj->DB->_connectionID, trim( $_POST['cname'] ));//姓名
     $arr['uDT']=time();
-    if( !$row)$msg = "修改失败，参数錯誤 Err-13";
+    if( !$row)$msg = "修改失敗，参数錯誤 Err-13";
     else {
-      if( $IsOk>0 ){ $IsOk =$obj->ProcModMyHw ( $arr ); }//文件上传成功再修改数据库
+      if( $IsOk>0 ){ $IsOk =$obj->ProcModMyHw ( $arr ); }//文件上傳成功再修改数据库
       if( $IsOk>0 ){ $msg ="檔案修改成功 <br />"; }
-      else $msg = "檔案修改失败 Err{$IsOk}";
+      else $msg = "檔案修改失敗 Err{$IsOk}";
     }
     $msg .= $obj->JS_CntDn( SITE_URL ."?f=HwDetail&c={$obj->LongEncode($row['hID'])}" , 5000);
     $view->assign('msg', $msg);
@@ -153,9 +154,9 @@ switch($f){
     $upPasswd= isset( $_POST['upPasswd'])?$_POST['upPasswd']:"";
     $IsOk= $obj->CheckCanUpload($hID, $upPasswd);
     if( $IsOk <=0){
-      if($IsOk ==-3) $msg ="檔案上传失败，非上传时间 Err{$IsOk}";
-      elseif($IsOk ==-4) $msg ="檔案上传失败，上传密码錯誤 Err{$IsOk}";
-      else $msg= "檔案上传失败 Err{$IsOk}";
+      if($IsOk ==-3) $msg ="檔案上傳失敗，非上傳时间 Err{$IsOk}";
+      elseif($IsOk ==-4) $msg ="檔案上傳失敗，上傳密码錯誤 Err{$IsOk}";
+      else $msg= "檔案上傳失敗 Err{$IsOk}";
       $msg .= $obj->JS_CntDn( SITE_URL . "?f=HwDetail&amp;c={$obj->LongEncode($hID)}" , 5000);
       $view->assign('msg', $msg);
       $view->display('Message.mtpl');
@@ -172,21 +173,24 @@ switch($f){
       $view->display('Message.mtpl');
       break;
     }
-    if($obj-> CheckUploadStatusByCid($cid, $hID)){
-      $msg="本学号已经上传过作業，请使用编辑功能或删除后重新上传！";
+/*
+	if($obj-> CheckUploadStatusByCid($cid, $hID)){
+      $msg="本学号已经上傳过作業，请使用编辑功能或删除后重新上傳！";
       $msg .= $obj->JS_CntDn( "{$_SESSION['currURL']}" , 5000);
       $view->assign('msg', $msg);
       $view->display('Message.mtpl');
       break;
     }
-    $imgDir = HWPREFIX .$hID. "/";   //ex: xx00/
+ */
+	$imgDir = HWPREFIX .$hID. "/";   //ex: xx00/
     if(empty($obj->GetHwFolderNameFormat($hID))) {
         $foldername = '';
     } else {
         $foldername = $obj->GetHwFolderNameFormat($hID) . "/";   //ex: xx00/
     }
-    if(empty($obj->GetHwFileNameFormat($hID))) {
-        $filename = "\$title-\$cid-\$cname.\$ext";
+	if(empty($obj->GetHwFileNameFormat($hID))) {
+		$rd= date('dis');
+        $filename = "\$title-\$cid-". $rd .".\$ext";
     } else {
         $filename = $obj->GetHwFileNameFormat($hID);
     }
@@ -200,14 +204,14 @@ switch($f){
       $arr['cid']= mysqli_real_escape_string($obj->DB->_connectionID, trim( $_POST['cid'] ));
       $arr['cname']= mysqli_real_escape_string($obj->DB->_connectionID, trim( $_POST['cname'] ));
       $arr['cDT']=time();
-      $arr['uDT']=$arr['cDT'];  //第一次上传时，更新时间与新增时间相同
+      $arr['uDT']=$arr['cDT'];  //第一次上傳时，更新时间与新增时间相同
       $IsOk =$obj->ProcAddHwUpload( $arr );
       if( $IsOk>0 ) $msg .="檔案上傳儲存成功 <br />";
-      else $msg .= "檔案上傳儲存失败 Err{$IsOk}";
+      else $msg .= "檔案上傳儲存失敗 Err{$IsOk}";
     }else{
       if($IsOk ==-1) $msg ="檔案傳輸錯誤 Err{$IsOk}";
-      elseif($IsOk ==-4) $msg ="檔案类型不被允许 Err{$IsOk}";
-      else $msg= "目录建立失败，请检查目录权限是否可供写入 Err{$IsOk}";
+      elseif($IsOk ==-4) $msg ="檔案類型不被允許 Err{$IsOk}";
+      else $msg= "目錄建立失敗，请检查目錄權限是否可供寫入 Err{$IsOk}";
     }
     $msg .= $obj->JS_CntDn(  SITE_URL . "?f=HwDetail&c={$obj->LongEncode($hID)}" , 3000);
     $view->assign('msg', $msg);
@@ -218,7 +222,7 @@ switch($f){
     $IsOk= $obj->SendFile2Browser($sn);   
     break;
   default:
-    $msg = "连结錯誤操作，一秒后导至首页{$f}".  $obj->JS_CntDn(  SITE_URL ,10000);
+    $msg = "連結錯誤，3秒後導至首頁{$f}".  $obj->JS_CntDn(  SITE_URL ,3000);
     $view->assign('msg', $msg);
     $view->display('Message.mtpl');
     break;

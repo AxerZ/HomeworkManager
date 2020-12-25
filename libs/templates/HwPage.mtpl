@@ -1,8 +1,8 @@
 {{include file='Header.mtpl'}}
 {{assign var='d' value=$obj->GetOneHw($hID) }}
 
-<script type="text/javascript" src="{{$smarty.const.SITE_URL}}js/blockUI/jquery.blockUI.js"></script>
-<script type="text/javascript">
+<script src="{{$smarty.const.SITE_URL}}js/blockUI/jquery.blockUI.js"></script>
+<script>
 $(function() {
   $("#sb1").click(function(){
     var msg="";
@@ -47,16 +47,16 @@ $(function() {
 <body>
 {{include file='Banner.mtpl'}}
 <div style="height:32px;">
-  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a> &gt; <a href="{{$smarty.const.SITE_URL}}?f=List">作業列表</a> &gt; {{$d.hwTitle}}</div>
+  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a> &gt; <a href="{{$smarty.const.SITE_URL}}?f=List">作業列表</a> &gt; {{$d.hwTitle}}  <span class="tree-classid">群組 {{$d.classID}}</span></div>
 </div>
 
 <div style="text-align:left;">
 
-<h3 style="text-shadow: 5px 5px 5px #197FD8;">{{$d.hwTitle}}</h3>
+<h3 style="text-shadow: 5px 5px 5px #197FD8;">{{$d.hwTitle}}  <span class="tree-classid">{{$d.classID}}</span></h3>
 <table width="100%" cellpadding="5" cellspacing="5" border="1" style="border:3px solid #71BF0B;border-collapse:collapse;text-align:left; font-size:12px;">
 <tr><td><small>[{{$d.hID}}]</small></td><td>上傳件數 {{$d.uploadCnt}}</td><td>通過件數 {{$d.passedCnt}}</td>
 <td><b>上傳有效日期 {{$d.fromDT}} ~ {{$d.dueDT}}</b></td>
-<td>{{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" width="12" height="12" />{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" width="12" height="12">{{/if}} {{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼"  width="12" height="12" />{{/if}} By {{$d.hwO}}</td></td>
+<td>{{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" width="12" height="12" />{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" width="12" height="12">{{/if}} {{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼"  width="12" height="12" />{{/if}} By {{$d.hwO}} {{if isset($smarty.session.email)}}<a href="/manage.php?f=Homework&c={{$d.hmc|default:''}}">管理</a>{{/if}}</td>
 </tr></table>
 <table width="100%">
 {{if $d.canUpload eq 1 }}

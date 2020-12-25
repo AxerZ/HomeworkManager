@@ -52,7 +52,9 @@ $(".scoreText").change(function(){
 <body>
 {{include file='Banner.mtpl'}}
 <div style="height:32px;">
-  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a> &gt; <a href="{{$smarty.const.SITE_URL}}?f=List">作業列表</a> &gt; <b>{{$d.hwTitle}}</b></div>
+  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">{{$smarty.const.SITE_CNAME}}</a>
+ &gt; <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework">作業管理</a> &gt;
+ <a href="{{$smarty.const.SITE_URL}}?f=List">作業列表</a> &gt; <b>{{$d.hwTitle}}</b> <span class="tree-classid">群組 {{$d.classID}}</span></div>
 </div>
 
 <div style="text-align:left;">
@@ -60,7 +62,7 @@ $(".scoreText").change(function(){
 <legend><b>{{$d.hwTitle}} <small>[{{$d.hID}}]</small></b></legend>
 <p style="margin-top:5px;">
 <b>發佈人</b> {{$d.hwO}} <b>上傳件數</b>{{$d.uploadCnt}} <b>通過件數</b>{{$d.passedCnt}} <b>點閱</b> {{$d.clicked}} 
- <b>最後上傳</b> {{$d.lastModDT}} <b>最後更新</b> {{$d.uDT}} <br /><b>上傳有效日期</b> {{$d.fromDT}} ~ {{$d.dueDT}}
+ <b>最後上傳</b> {{$d.lastModDT}} <b>最後更新</b> {{$d.uDT}} <br/>
 {{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" title="開放訪客參觀" alt="開放訪客參觀" width="24" height="24" />{{/if}}
 {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" title="關閉中作業" alt="關閉中作業" width="24" height="24">{{/if}}
 {{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" title="上傳需要密碼" alt="上傳需要密碼"  width="24" height="24" />{{/if}}

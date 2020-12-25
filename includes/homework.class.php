@@ -86,7 +86,7 @@ class Homework_class extends Bila_base_class {
     $row= $this->DB->GetRow( $sql );
     $currD =date("Y-m-d H:i:s");//时间精确到秒，精准限制提交时间需求
     if( $currD <= $row['dueDT'] &&  $currD >= $row['fromDT'] && $row['closed']==0)$row['canUpload']= 1;
-    else $row['canUpload']= 0;
+	else $row['canUpload']= 0;
     return $row;
   }
   public function GetOneUploadHw($sn){

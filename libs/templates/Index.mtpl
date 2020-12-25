@@ -1,10 +1,53 @@
 {{include file='Header.mtpl'}}
 
-{{assign var='b' value=$obj->GetTableArr()}}
+</head>
 
-<script src="{{$smarty.const.SITE_URL}}js/cookie/jquery.cookie.js" type="text/javascript"></script>
-<script type="text/javascript">
+<body style="text-align:center;">
+{{include file='Banner.mtpl'}}
+
+<div style="text-align:left;">
+<div class="opbar"><span id="openall">全展開</span> <span id="closeall">全收縮</span></div>
+<div style="display:inline-block" class="sortbar">排序方式 <span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=8">群組</a></span> 
+<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=9">有異動</a></span> 
+<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=7">建立時間</a></span></div>
+<table border="0" width="975">
+ {{assign var='ii' value=1 }}
+{{foreach from=$obj->GetHwGroupList() item=b}}
+<tr><td height="36"><img src="{{$smarty.const.SITE_URL}}images/node/del.gif" width="20" class="folding" />
+  <div class="catalog-title">{{$b.classID|default:'無分類群組'}}
+    <span class="catalog-span">筆數 {{$b.cnt}}</span>
+  </div>
+  <div class="homework-group" id="{{$b.hash}}"> 
+   {{foreach from=$obj->GetHwGroupDetails($b.classID) item=d}}
+     <div class="one-homework" style="background-color:{{cycle values="#95c1f9,#e6f5f7"}}">
+     - <a href="{{$smarty.const.SITE_URL}}index.php?f=HwDetail&amp;c={{$d.vc}}" title="{{$d.hwTitle}}">
+       <div class="title"><b>{{$d.hwTitle}}</b><small>[{{$d.hID}}]</small></div></a>
+       <span>上傳{{$d.uploadCnt}} 通過{{$d.passedCnt}} By {{$d.hwO}}</span> 
+       上傳期間至{{$d.dueDT}}止 　
+{{if $d.canUpload ==1}}<span class="uploading">作業上傳中{{else}}<span style="color:#777; background-color:#FFFFCF;">已逾期{{/if}}</span>
+{{if $d.display ==1}}<span style="color:white; background-color:#8C2552; padding:2px;">開放參觀{{/if}}</span>
+       <!-- <div style="float:right; width:200px;">最後異動 {{$d.lastModDT|default:'無'}}</div> -->
+     </div>
+   {{/foreach}}
+  </div>
+</td></tr>
+{{assign var="ii" value="`$ii+1`"}}
+{{/foreach}}
+
+<tr><td><div class="fy">{{$obj->CreateHwListPgStr()}}</div></td></tr>
+</table>
+</div>
+
+{{include file='Footer.mtpl'}}
+</body>
+{{assign var='b' value=$obj->GetTableArr()}}
+<script src="{{$smarty.const.SITE_URL}}js/cookie/jquery.cookie.js"></script>
+<script>
+
 $(function() {
+  $(":text, :password").css({border: "2px solid #ccc", background: "#FCE8E8"});
+  $(":text, :password").focus(function(){ $(this).css({border: "2px solid #9E0000"});});
+  $(":text, :password").blur(function(){ $(this).css({border:"2px solid #ccc", background: "#FCE8E8"}); });
 $("#hkw").val("{{$b.hkw}}");
 if($.cookie('odr')==null)$.cookie('odr',0);
 if( !{{$b._display|default:0}} )$("#_display").attr("checked",false); else $("#_display").attr("checked",true);
@@ -15,7 +58,7 @@ $("#hsb2").click(function(){
   var s="_display="+_display + ",_thissem="+_thissem;
   $("#s").val(s);
 });
-$(".folding").click(function(){ var disdiv= $(this).next().next().next();
+$(".folding").click(function(){ var disdiv= $(this).next().next();
   var arr=[];  var clzid= disdiv.attr("id");
   if(disdiv.css("display")=="none"){disdiv.css("display", "block"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/del.gif");
     if($.cookie('clzarr') !=null){ arr=$.cookie('clzarr').split(','); arrpull(arr,clzid);}
@@ -28,12 +71,12 @@ $(".folding").click(function(){ var disdiv= $(this).next().next().next();
 });
 //openall/closeall
 $(".opbar > span").click(function(){ var id=$(this).attr("id"); 
-  if(id=="openall"){ $(".folding").each(function(){ var disdiv= $(this).next().next().next(); disdiv.css("display", "block"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/del.gif"); }); $.cookie('clzarr',''); }
-  else{ var arr=[]; $(".folding").each(function(){ var disdiv= $(this).next().next().next(); disdiv.css("display", "none"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/add.gif"); clzid= disdiv.attr("id"); arr.push(clzid); }); var str=arr.join(','); $.cookie('clzarr',str); }
+  if(id=="openall"){ $(".folding").each(function(){ var disdiv= $(this).next().next(); disdiv.css("display", "block"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/del.gif"); }); $.cookie('clzarr',''); }
+  else{ var arr=[]; $(".folding").each(function(){ var disdiv= $(this).next().next(); disdiv.css("display", "none"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/add.gif"); clzid= disdiv.attr("id"); arr.push(clzid); }); var str=arr.join(','); $.cookie('clzarr',str); }
 });
 
 if($.cookie('clzarr') !=null){ var arr=$.cookie('clzarr').split(',');
-  $(".folding").each(function(){ var disdiv= $(this).next().next().next(); 
+  $(".folding").each(function(){ var disdiv= $(this).next().next(); 
     if( itemexist(arr,disdiv.attr("id"))){
 disdiv.css("display", "none"); $(this).attr("src","{{$smarty.const.SITE_URL}}images/node/add.gif");  }
 });
@@ -67,44 +110,4 @@ function arrpull(arr,v){
 function itemexist(arr,v){ if(arr.lastIndexOf(v)==-1)return false;  return true;}
 });
 </script>
-</head>
-
-<body style="text-align:center;">
-{{include file='Banner.mtpl'}}
-
-<div style="text-align:left;">
-<div style="display:inline-block; height:35px; margin-right:30px;" class="opbar"><span id="openall">全展開</span> <span id="closeall">全收縮</span></div>
-<div style="display:inline-block" class="sortbar">排序方式 <span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=8">群組</a></span> 
-<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=9">有異動</a></span> 
-<span><a href="{{$smarty.const.SITE_URL}}index.php?c={{$c}}&amp;odr=7">建立時間</a></span></div>
-<table border="0" width="975">
- {{assign var='ii' value=1 }}
-{{foreach from=$obj->GetHwGroupList() item=b}}
-<tr><td height="30"><img src="{{$smarty.const.SITE_URL}}images/node/del.gif" width="20" class="folding" />
-  <div style="display:inline-block; min-width:130px; background-color:#DED7CA; color:#333; vertical-align:top; font-weight:bold; font-size:16px; padding-left:5px; padding-right:10px;">{{$b.classID|default:'無分類群組'}}</div>
-  <span style="vertical-align:text-bottom; font-size:13px; color:#777">筆數 <span style="color:#002008">{{$b.cnt}}</span> 上傳數{{$b.sumup}}/ 通過數{{$b.sumpass}}</span>
-  <div id="{{$b.hash}}"> 
-   {{foreach from=$obj->GetHwGroupDetails($b.classID) item=d}}
-     <div style="color:#444; margin-left:26px; display:block; font-size:10pt; background-color:{{cycle values="#EDAABC,#E0DEEE"}}">
-     - <small>[{{$d.hID}}]</small> 
-       <div style="padding-right:30px; font-size:11pt; min-width:170px; font-weight:bold; display:inline-block;"><a href="{{$smarty.const.SITE_URL}}index.php?f=HwDetail&amp;c={{$d.vc}}" title="{{$d.hwTitle}}"><b>{{$d.hwTitle}}</b></a></div>
-       <span>上傳{{$d.uploadCnt}} 通過{{$d.passedCnt}} By {{$d.hwO}}</span> 
-       開放上傳 {{$d.fromDT}}~{{$d.dueDT}}
-{{if $d.canUpload ==1}}<span style="color:white; background-color:#9E0000; padding:2px;">作業上傳中{{else}}<span style="color:#777; background-color:#FFFFCF;">已逾期{{/if}}</span>
-{{if $d.display ==1}}<span style="color:white; background-color:#8C2552; padding:2px;">開放參觀{{/if}}</span>
-       <!-- <div style="float:right; width:200px;">最後異動 {{$d.lastModDT|default:'無'}}</div> -->
-     </div>
-   {{/foreach}}
-  </div>
-</td></tr>
-{{assign var="ii" value="`$ii+1`"}}
-{{/foreach}}
-
-<tr><td><div class="fy">{{$obj->CreateHwListPgStr()}}</div></td></tr>
-</table>
-</div>
-
-{{include file='Footer.mtpl'}}
-
-</body>
 

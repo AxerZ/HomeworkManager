@@ -97,7 +97,7 @@ class Manage_class extends Bila_base_class {
       $tbl['stp']=6;  //delete
       $arr[$ii]['delc'] = $this->Encrypt_Arr2c($tbl);
       $tbl['stp']=7;  //hw mng c
-      $arr[$ii]['hwc'] = $this->Encrypt_Arr2c($tbl);
+	  $arr[$ii]['hwc'] = $this->Encrypt_Arr2c($tbl);
       $tbl['stp']=9;  //download c
       $arr[$ii]['dlc'] = $this->Encrypt_Arr2c($tbl);
       if( $currD <= $arr[$ii]['dueDT'] &&  $currD >= $arr[$ii]['fromDT'] && $arr[$ii]['closed']==0)$arr[$ii]['canUpload']= 1;

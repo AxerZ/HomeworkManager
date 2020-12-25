@@ -219,7 +219,9 @@ class Index_class extends Bila_base_class {
     if( $currD <= $row['dueDT'] &&  $currD >= $row['fromDT'] && $row['closed']==0)$row['canUpload']= 1;
     else $row['canUpload']= 0;
     $row['upc']=  $this->Encrypt_Arr2c( array('sn'=>$row['hID'], 'stp'=>2, 'pg'=>1));
-    return $row;
+    $tbl= Array ( "pg" => 1, "kw" =>"", "s" => "","from" => "","to" => "","odr" => 0, "sn" => $row['hID'], "stp" => 7 ) ;
+    $row['hmc']= $this->Encrypt_Arr2c($tbl);
+	return $row;
   }
 
   //此函数设定表单的状态
